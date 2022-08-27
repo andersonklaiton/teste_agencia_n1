@@ -18,7 +18,7 @@ export const Container = styled.div`
     @media(min-width:580px){
         height:50px ;
         font-size:15px;
-        justify-content: space-around;
+        justify-content: space-evenly;
     }
 `
 export const ChangeDiv = styled.div`
