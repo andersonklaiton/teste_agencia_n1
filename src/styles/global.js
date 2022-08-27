@@ -39,5 +39,6 @@ export default createGlobalStyle`
         --barblue:#2F1893;
         --white: #FFFFFF;
         --black: #000000;
+        --ligthgray: #D2D1D7;
     }
 `;
