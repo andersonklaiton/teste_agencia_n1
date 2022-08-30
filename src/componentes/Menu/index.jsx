@@ -1,15 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate} from "react-router-dom"
 import { ButtonMenu, ButtonPath, ButtonRaiz, ButtonSearch, CartDiv, ContainerButton, ContainerButtons, ContainerIcons, ContainerInput, ContainerMenu, InputSearch, MenuDiv, MenuList, UserDiv } from "./styles"
 import {IoIosMenu}from "react-icons/io"
 import {FiSearch, FiShoppingCart,FiUser} from "react-icons/fi"
 
-const Menu =()=>{
+const Menu =(cart)=>{
   
   const navegate = useNavigate()
   const [hidden, setHidden]= useState(true)
-  const [totalCart, setTotalCart]=useState(0)
+  const [totalCart, setTotalCart]=useState(JSON.parse(localStorage.getItem("cart"))||0)
   const [showInput, setShowInput]= useState(true)
+  
+  useEffect(()=>{
+    setTotalCart(JSON.parse(localStorage.getItem("cart"))||0)
+    
+  }, [])
   
 
   const handleClick = (path)=>{
@@ -46,10 +51,10 @@ const Menu =()=>{
           {showInput &&(
             <ContainerInput>
               <InputSearch placeholder="O que você procura?"></InputSearch>
-              <ButtonSearch><FiSearch onClick={()=>setShowInput(!showInput)}/></ButtonSearch>
+              <ButtonSearch><FiSearch onClick={()=>showInputSearch()}/></ButtonSearch>
             </ContainerInput>
           )}
-          {!showInput &&<FiSearch onClick={()=> setShowInput(!showInput)}/>}
+          {!showInput &&<FiSearch onClick={()=> showInputSearch()}/>}
           <UserDiv><FiUser/></UserDiv>
           <button><FiShoppingCart/></button>
           <CartDiv><p>{totalCart}</p></CartDiv>
